@@ -14,7 +14,7 @@ async function generateText(prompt) {
     }, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer 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 `,
+        'Authorization': `Bearer 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 `,
       },
     });
     console.log(response);

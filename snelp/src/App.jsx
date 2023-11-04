@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import './App.css';
 import Tesseract from 'tesseract.js';
-import Gpt from './components/Gpt';
+import Openai from './components/Openai';
 
 function App() {
 
@@ -66,6 +66,8 @@ function App() {
               <>
                 <textarea value={text} className='form-control' cols="70" rows="15" onChange={(e) => setText(e.target.value)}>
                 </textarea>
+                <Openai text= { text }/>
+
               </>
             )
           }
