@@ -1,0 +1,72 @@
+import React from 'react';
+import { useState } from 'react';
+import './App.css';
+import Tesseract from 'tesseract.js';
+
+function App() {
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState("");
+  const [image, setImage] = useState(" ");
+  const [progress, setProgress] = useState(0);
+
+  const handleClick = () => {
+    setIsLoading(true);
+    Tesseract.recognize(
+      image,
+      'eng',
+      { logger: m => console.log(m) }
+    ).then(({ data: { text } }) => {
+      setText(text);
+      setIsLoading(false);
+
+    })
+
+  }
+
+
+  return (
+    <div className="App" style={{ height: '100vh' }}>
+      <div className="row">
+        <div className="container">
+          {!isLoading && <h1 className='header'>Image to text</h1>}
+          {/* form */}
+          {
+            !isLoading && !text && (
+              <>
+                <input type="file" className='fileup' onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} />
+                <input
+                type="button"
+                className='butt'
+                value="Convert"
+                onClick={handleClick} />
+              </>
+            )
+          }
+          {/* {progress bad} */}
+          {
+            isLoading && (
+              <>
+                <p className='para'>
+                  Converting: - {progress} %
+                </p>
+              </>
+            )
+          }
+          {/* {textarea} */}
+
+          {
+            !isLoading && text && (
+              <>
+                <textarea value={text} className='form-control' cols="30" rows="15" onChange={(e) => setText(e.target.value)}>
+                </textarea>
+              </>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
