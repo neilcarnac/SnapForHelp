@@ -7,7 +7,7 @@ const OPENAI_API_KEY = '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'; //
 function Openai({ text }) {
   const [generatedText, setGeneratedText] = useState('');
   const prompt = text;
-
+    
   useEffect(() => {
     async function generateText() {
       try {
@@ -31,9 +31,11 @@ function Openai({ text }) {
       }
     }
 
+    // Call generateText within the useEffect
     generateText();
+
+    // Remove any references to `pr` as it's not defined in your code
   }, [prompt]);
-  console.log(prompt)
 
   return (
     <div>
