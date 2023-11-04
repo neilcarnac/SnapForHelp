@@ -18,7 +18,7 @@ function Openai({text}) {
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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',
+          'Authorization': `Bearer ${process.env.API_KEY}`,
         },
       });
       console.log(response);
