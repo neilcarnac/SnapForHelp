@@ -12,18 +12,23 @@ function App() {
 
   const handleClick = () => {
     setIsLoading(true);
-    Tesseract.recognize(
-      image,
-      'eng',
-      { logger: m => console.log(m) }
-    ).then(({ data: { text } }) => {
-      setText(text);
-      setIsLoading(false);
-
+    Tesseract.recognize(image, 'eng', {
+      logger: (m) => {
+        console.log(m);
+        if (m.status === 'recognizing text') {
+          setProgress(parseInt(m.progress * 100));
+        }
+      },
     })
-
-  }
-
+      .catch((err) => {
+        console.error(err);
+      })
+      .then((result) => {
+        console.log(result.data);
+        setText(result.data.text);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <div className="App" style={{ height: '100vh' }}>
@@ -58,7 +63,7 @@ function App() {
           {
             !isLoading && text && (
               <>
-                <textarea value={text} className='form-control' cols="30" rows="15" onChange={(e) => setText(e.target.value)}>
+                <textarea value={text} className='form-control' cols="70" rows="15" onChange={(e) => setText(e.target.value)}>
                 </textarea>
               </>
             )
