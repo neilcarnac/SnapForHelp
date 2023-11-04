@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import './App.css';
 import Tesseract from 'tesseract.js';
+import Gpt from './components/Gpt';
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
               </>
             )
           }
+
         </div>
       </div>
     </div>
