@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const API_ENDPOINT = 'https://api.openai.com/v1/engines/davinci/completions';
-const OPENAI_API_KEY = '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'; // Replace with your actual API key
+const OPENAI_API_KEY = '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';
 
 function Openai({ text }) {
   const [generatedText, setGeneratedText] = useState('');
